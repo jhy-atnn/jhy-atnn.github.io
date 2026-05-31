@@ -1,4 +1,4 @@
-# jhy-atnn-jhy-atnn.github.io
+# jhy-atnn.github.io
 
 ## Heyya! I'm Jhody 😉	
 
