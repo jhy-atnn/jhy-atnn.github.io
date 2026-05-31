@@ -53,7 +53,7 @@ h6 {
 
 .section-label {
     display: inline-block;
-    font-size:.9rem;
+    font-size: .9rem;
     font-weight: 700;
     letter-spacing: .18em;
     text-transform: uppercase;
@@ -384,7 +384,7 @@ section {
 }
 
 .custom-skill-icon {
-    width: 60px; 
+    width: 60px;
     height: 60px;
     object-fit: contain;
 }
@@ -394,7 +394,7 @@ section {
     font-weight: 700;
     letter-spacing: .06em;
     text-transform: uppercase;
-    color: var(--orange );
+    color: var(--orange);
 }
 
 
@@ -445,6 +445,7 @@ section {
 /* ── Projects ── */
 #projects {
     background: var(--bg-alt-orange);
+    overflow: hidden;
 }
 
 .project-card {
@@ -518,6 +519,38 @@ section {
     text-transform: uppercase;
     color: var(--text-muted-custom);
     margin: .15rem .1rem;
+}
+
+.carousel-container {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    padding: 1rem 0;
+}
+
+.carousel-track {
+    display: flex;
+    gap: 2rem;
+    width: max-content;
+    animation: scroll 30s linear infinite;
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(calc(-50% - 1rem));
+    }
+}
+
+.project-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    width: 380px;
+    flex-shrink: 0;
 }
 
 /* ── Experience ── */

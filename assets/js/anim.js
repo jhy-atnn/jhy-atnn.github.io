@@ -45,3 +45,13 @@ window.addEventListener('scroll', () => {
 }, { passive: true });
 
 btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+// CAROUSEL
+document.addEventListener("DOMContentLoaded", () => {
+    const projectTrack = document.getElementById('projectTrack');
+
+    if (projectTrack) {
+        const originalContent = projectTrack.innerHTML;
+        projectTrack.innerHTML += originalContent;
+    }
+});
