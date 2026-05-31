@@ -3,11 +3,12 @@
     --pink: #FF3CAC;
     --purple: #7B2FF7;
     --bg-main: #ffffff;
-    --bg-alt: #f4f6f9;
+    --bg-alt: #fcf9ff;
     --card-bg: #ffffff;
     --border: rgba(0, 0, 0, 0.08);
     --text-main: #1d1d1f;
     --text-muted-custom: #6e6e73;
+    --bg-alt-orange: #fdf7f2;
 
     --gradient: linear-gradient(135deg, var(--orange) 0%, var(--pink) 50%, var(--purple) 100%);
     --gradient-btn: linear-gradient(90deg, var(--orange), var(--pink));
@@ -52,7 +53,7 @@ h6 {
 
 .section-label {
     display: inline-block;
-    font-size: .72rem;
+    font-size:.9rem;
     font-weight: 700;
     letter-spacing: .18em;
     text-transform: uppercase;
@@ -168,11 +169,15 @@ h6 {
 #hero::before {
     content: '';
     position: absolute;
+    left: 10px;
     inset: 0;
-    background:
-        radial-gradient(ellipse 55% 55% at 70% 50%, rgba(255, 60, 170, 0.137) 0%, transparent 70%),
-        radial-gradient(ellipse 40% 40% at 20% 80%, rgba(255, 106, 0, 0.103) 0%, transparent 60%);
+    z-index: 0;
     pointer-events: none;
+}
+
+#hero .container {
+    position: relative;
+    z-index: 1;
 }
 
 .hero-tag {
@@ -230,7 +235,6 @@ h6 {
     height: 100%;
     border-radius: 50%;
     background: var(--bg-main);
-    /* Updated to match light theme */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -243,7 +247,6 @@ h6 {
     object-fit: cover;
     border-radius: 50%;
     filter: none;
-    /* Removed grayscale for a cleaner look */
 }
 
 .orb-ring::after {
@@ -380,65 +383,20 @@ section {
     margin: 0 auto .55rem;
 }
 
+.custom-skill-icon {
+    width: 60px; 
+    height: 60px;
+    object-fit: contain;
+}
+
 .skill-icon-card span.label {
-    font-size: .72rem;
+    font-size: .80rem;
     font-weight: 700;
     letter-spacing: .06em;
     text-transform: uppercase;
-    color: var(--text-main);
+    color: var(--orange );
 }
 
-/* Skill Colors */
-.ic-python {
-    background: rgba(55, 118, 171, .15);
-    color: #3776AB;
-}
-
-.ic-html {
-    background: rgba(228, 77, 38, .15);
-    color: #E44D26;
-}
-
-.ic-css {
-    background: rgba(21, 114, 182, .15);
-    color: #1572B6;
-}
-
-.ic-js {
-    background: rgba(247, 223, 30, .2);
-    color: #D4B800;
-}
-
-/* Darkened yellow slightly for contrast */
-.ic-json {
-    background: rgba(0, 160, 100, .15);
-    color: #00A064;
-}
-
-.ic-cpp {
-    background: rgba(0, 89, 156, .15);
-    color: #00599C;
-}
-
-.ic-csharp {
-    background: rgba(104, 33, 122, .15);
-    color: #68217A;
-}
-
-.ic-java {
-    background: rgba(232, 55, 55, .15);
-    color: #E83737;
-}
-
-.ic-php {
-    background: rgba(119, 123, 180, .15);
-    color: #777BB4;
-}
-
-.ic-dart {
-    background: rgba(0, 180, 172, .15);
-    color: #00B4AC;
-}
 
 /* ── Services ── */
 #services {
@@ -486,7 +444,7 @@ section {
 
 /* ── Projects ── */
 #projects {
-    background: var(--bg-alt);
+    background: var(--bg-alt-orange);
 }
 
 .project-card {
@@ -569,7 +527,7 @@ section {
 
 .timeline {
     position: relative;
-    padding-left: 2.1rem;
+    padding-left: 2.158rem;
 }
 
 .timeline::before {

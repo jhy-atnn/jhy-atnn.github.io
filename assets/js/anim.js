@@ -45,13 +45,3 @@ window.addEventListener('scroll', () => {
 }, { passive: true });
 
 btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-
-document.querySelectorAll('.nav-link').forEach(link => {
-    link.addEventListener('click', () => {
-        const collapse = document.getElementById('navMenu');
-        if (typeof bootstrap !== 'undefined') {
-            const bsCollapse = bootstrap.Collapse.getInstance(collapse);
-            if (bsCollapse) bsCollapse.hide();
-        }
-    });
-});
