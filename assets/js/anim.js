@@ -55,3 +55,73 @@ document.addEventListener("DOMContentLoaded", () => {
         projectTrack.innerHTML += originalContent;
     }
 });
+
+(function () {
+    const gridItems = document.querySelectorAll('.si-grid-item');
+
+    if (!gridItems.length) return;
+
+    const gridObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                const items = [...document.querySelectorAll('.si-grid-item')];
+                const idx = items.indexOf(entry.target);
+                setTimeout(() => {
+                    entry.target.classList.add('si-grid-visible');
+                }, idx * 120);
+                gridObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.15 });
+
+    gridItems.forEach(el => gridObserver.observe(el));
+})();
+
+(function () {
+    const siName = document.querySelector('.si-name');
+    if (!siName) return;
+
+    let ticking = false;
+
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            requestAnimationFrame(() => {
+                const section = document.getElementById('social-intro');
+                if (!section) return;
+                const rect = section.getBoundingClientRect();
+                const progress = -rect.top / (rect.height || 1);
+                const offset = Math.min(Math.max(progress * 18, -8), 8);
+                siName.style.transform = `translateY(${offset}px)`;
+                ticking = false;
+            });
+            ticking = true;
+        }
+    }, { passive: true });
+})();
+
+// Parallax Scrolling Engine for Display Typography
+(function () {
+    const siName = document.querySelector('.si-name');
+    if (!siName) return;
+
+    let ticking = false;
+
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            window.requestAnimationFrame(() => {
+                const section = document.getElementById('social-intro');
+                if (section) {
+                    const rect = section.getBoundingClientRect();
+                    // Detect viewport status coordinates
+                    if (rect.top < window.innerHeight && rect.bottom > 0) {
+                        const speed = 0.08;
+                        const yPos = -(rect.top * speed);
+                        siName.style.transform = `translateY(${yPos}px)`;
+                    }
+                }
+                ticking = false;
+            });
+            ticking = true;
+        }
+    }, { passive: true });
+})(); 
