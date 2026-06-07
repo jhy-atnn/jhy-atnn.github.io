@@ -1,0 +1,239 @@
+/* ═══════════════════════════════════════════════════════════
+   FOOTER.CSS — Rich Instagram-motif Footer
+═══════════════════════════════════════════════════════════ */
+
+footer {
+    background: #0d0d0d;
+    color: #e0e0e0;
+    padding: 3.5rem 0 1.8rem;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Subtle gradient top border */
+footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--gradient);
+}
+
+/* Faint background glow */
+footer::after {
+    content: '';
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,60,172,0.06) 0%, transparent 70%);
+    top: -200px;
+    right: -100px;
+    pointer-events: none;
+}
+
+.footer-inner {
+    position: relative;
+    z-index: 1;
+}
+
+/* ── Top row: Logo + Nav ── */
+.footer-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 2rem;
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    flex-wrap: wrap;
+}
+
+.footer-brand .footer-logo {
+    height: 44px;
+    margin-bottom: 1rem;
+    filter: brightness(0) invert(1);
+    opacity: 0.9;
+}
+
+.footer-brand p {
+    font-size: .83rem;
+    color: rgba(255,255,255,0.45);
+    max-width: 240px;
+    line-height: 1.7;
+    margin: 0;
+}
+
+/* IG handle badge */
+.footer-ig-handle {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: linear-gradient(135deg, rgba(255,107,0,0.15), rgba(255,60,172,0.15));
+    border: 1px solid rgba(255,60,172,0.25);
+    border-radius: 50px;
+    padding: .3rem .85rem;
+    font-size: .75rem;
+    font-weight: 600;
+    color: var(--pink);
+    text-decoration: none;
+    margin-top: .8rem;
+    transition: background .25s, transform .2s;
+}
+
+.footer-ig-handle:hover {
+    background: linear-gradient(135deg, rgba(255,107,0,0.25), rgba(255,60,172,0.25));
+    color: var(--pink);
+    transform: translateY(-1px);
+}
+
+.footer-ig-handle i { font-size: .85rem; }
+
+/* ── Footer Nav ── */
+.footer-nav-group h6 {
+    font-size: .7rem;
+    font-weight: 700;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+    margin-bottom: 1rem;
+}
+
+.footer-nav-group ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: .6rem;
+}
+
+.footer-nav-group ul a {
+    color: rgba(255,255,255,0.6);
+    text-decoration: none;
+    font-size: .85rem;
+    font-weight: 500;
+    transition: color .2s, padding-left .2s;
+    display: inline-block;
+}
+
+.footer-nav-group ul a:hover {
+    color: #fff;
+    padding-left: 4px;
+}
+
+/* ── Social icons ── */
+.footer-socials-row {
+    display: flex;
+    gap: 10px;
+    margin-top: 1.2rem;
+}
+
+.footer-soc-btn {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.12);
+    color: rgba(255,255,255,0.6);
+    font-size: .95rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: all .25s;
+    background: rgba(255,255,255,0.04);
+}
+
+.footer-soc-btn:hover {
+    border-color: var(--pink);
+    color: var(--pink);
+    background: rgba(255,60,172,0.08);
+    transform: translateY(-2px);
+}
+
+.footer-soc-btn.ig-soc:hover {
+    border-color: var(--orange);
+    color: var(--orange);
+    background: rgba(255,107,0,0.08);
+}
+
+/* ── Bottom bar ── */
+.footer-bottom {
+    padding-top: 1.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.footer-copy {
+    font-size: .75rem;
+    color: rgba(255,255,255,0.3);
+    margin: 0;
+}
+
+.footer-copy span {
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+}
+
+.footer-made-with {
+    font-size: .72rem;
+    color: rgba(255,255,255,0.25);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.footer-made-with i {
+    color: var(--pink);
+    font-size: .8rem;
+    animation: heartBeatFooter 1.8s ease-in-out infinite;
+}
+
+@keyframes heartBeatFooter {
+    0%, 100% { transform: scale(1); }
+    14%  { transform: scale(1.25); }
+    28%  { transform: scale(1); }
+    42%  { transform: scale(1.15); }
+    70%  { transform: scale(1); }
+}
+
+/* ── Location tag ── */
+.footer-location {
+    font-size: .75rem;
+    color: rgba(255,255,255,0.3);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin: 0;
+}
+
+.footer-location i { color: var(--orange); }
+
+/* ── Responsive ── */
+@media (max-width: 767.98px) {
+    .footer-top {
+        flex-direction: column;
+        gap: 2.5rem;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+        gap: .8rem;
+    }
+
+    .footer-nav-group {
+        min-width: 130px;
+    }
+}
+
+@media (max-width: 575.98px) {
+    footer { padding: 2.5rem 0 1.5rem; }
+}
