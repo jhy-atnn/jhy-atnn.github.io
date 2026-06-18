@@ -1,13 +1,5 @@
-/* ═══════════════════════════════════════════════════════════
-   ANIM.JS — Scroll, Nav, Hearts, Parallax, Carousel
-   Portfolio: Jhody Atinon · @jhy_atnn
-═══════════════════════════════════════════════════════════ */
-
 'use strict';
 
-/* ─────────────────────────────────────────
-   1. ACTIVE NAV LINK ON SCROLL
-───────────────────────────────────────── */
 const sections  = document.querySelectorAll('section[id]');
 const navLinks  = document.querySelectorAll('.nav-link');
 
@@ -23,23 +15,16 @@ const onNavScroll = () => {
 window.addEventListener('scroll', onNavScroll, { passive: true });
 
 
-/* ─────────────────────────────────────────
-   2. SCROLLED CAPSULE NAV
-───────────────────────────────────────── */
 const nav = document.getElementById('mainNav');
 window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 60);
 }, { passive: true });
 
 
-/* ─────────────────────────────────────────
-   3. MOBILE BURGER — ensure Bootstrap works
-───────────────────────────────────────── */
 const toggler    = document.querySelector('.navbar-toggler');
 const navMenu    = document.getElementById('navMenu');
 
 if (toggler && navMenu) {
-    // Close menu when a nav link is clicked (mobile)
     navMenu.querySelectorAll('.nav-link').forEach(link => {
         link.addEventListener('click', () => {
             if (window.innerWidth < 992) {
@@ -52,9 +37,6 @@ if (toggler && navMenu) {
 }
 
 
-/* ─────────────────────────────────────────
-   4. SCROLL REVEAL (multi-direction)
-───────────────────────────────────────── */
 const revealClasses = ['.reveal', '.reveal-left', '.reveal-right', '.reveal-scale'];
 const allReveals    = document.querySelectorAll(revealClasses.join(','));
 
@@ -77,9 +59,6 @@ const revealObserver = new IntersectionObserver((entries) => {
 allReveals.forEach(el => revealObserver.observe(el));
 
 
-/* ─────────────────────────────────────────
-   5. GRID ITEMS (social-intro)
-───────────────────────────────────────── */
 (function () {
     const gridItems = document.querySelectorAll('.si-grid-item');
     if (!gridItems.length) return;
@@ -100,9 +79,6 @@ allReveals.forEach(el => revealObserver.observe(el));
 })();
 
 
-/* ─────────────────────────────────────────
-   6. PARALLAX on si-name
-───────────────────────────────────────── */
 (function () {
     const siName  = document.querySelector('.si-name');
     if (!siName) return;
@@ -128,9 +104,6 @@ allReveals.forEach(el => revealObserver.observe(el));
 })();
 
 
-/* ─────────────────────────────────────────
-   7. BACK TO TOP
-───────────────────────────────────────── */
 const backBtn = document.getElementById('backToTop');
 if (backBtn) {
     window.addEventListener('scroll', () => {
@@ -143,21 +116,142 @@ if (backBtn) {
 }
 
 
-/* ─────────────────────────────────────────
-   8. PROJECT CAROUSEL (infinite clone)
-───────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {
     const projectTrack = document.getElementById('projectTrack');
-    if (projectTrack) {
-        projectTrack.innerHTML += projectTrack.innerHTML;
+    const projectDetail = document.getElementById('projectDetail');
+    if (!projectTrack || !projectDetail) return;
+
+    const originalCards = Array.from(projectTrack.querySelectorAll('.project-link'));
+    originalCards.forEach((card) => {
+        const clone = card.cloneNode(true);
+        clone.classList.remove('active');
+        projectTrack.appendChild(clone);
+    });
+
+    const detailCount = document.getElementById('projectDetailCount');
+    const detailCat = document.getElementById('projectDetailCat');
+    const detailTitle = document.getElementById('projectDetailTitle');
+    const detailDesc = document.getElementById('projectDetailDesc');
+    const detailTags = document.getElementById('projectDetailTags');
+    const detailLink = document.getElementById('projectDetailLink');
+
+    let currentIndex = 0;
+    let autoRotateInterval = null;
+
+    function setProjectDetails(card) {
+        const cat = card.querySelector('.project-cat')?.textContent.trim() || '';
+        const title = card.querySelector('h5')?.textContent.trim() || '';
+        const desc = card.querySelector('p')?.textContent.trim() || '';
+        const tags = Array.from(card.querySelectorAll('.tech-tag')).map(tag => tag.outerHTML).join('');
+
+        projectTrack.querySelectorAll('.project-link').forEach((item) => {
+            item.classList.toggle('active', item.querySelector('h5')?.textContent.trim() === title);
+        });
+
+        projectDetail.classList.add('is-changing');
+        window.setTimeout(() => {
+            detailCount.textContent = card.dataset.index || '01';
+            detailCat.textContent = cat;
+            detailTitle.textContent = title;
+            detailDesc.textContent = desc;
+            detailTags.innerHTML = tags;
+            detailLink.href = card.dataset.url || '#';
+
+            projectDetail.classList.remove('is-changing');
+        }, 140);
     }
+
+    function rotateToNext() {
+        const allCards = projectTrack.querySelectorAll('.project-link');
+        if (allCards.length === 0) return;
+        
+        currentIndex = (currentIndex + 1) % originalCards.length;
+        setProjectDetails(allCards[currentIndex]);
+    }
+
+    function startAutoRotate() {
+        autoRotateInterval = setInterval(rotateToNext, 6700);
+    }
+
+    if (originalCards.length > 0) {
+        setProjectDetails(originalCards[0]);
+        startAutoRotate();
+    }
+
+    projectTrack.addEventListener('click', (event) => {
+        const card = event.target.closest('.project-link');
+        if (!card) return;
+        
+        const allCards = projectTrack.querySelectorAll('.project-link');
+        currentIndex = Array.from(allCards).indexOf(card) % originalCards.length;
+        
+        setProjectDetails(card);
+        
+        clearInterval(autoRotateInterval);
+        startAutoRotate();
+    });
+
+    const carouselContainer = projectTrack.parentElement;
+    let lastClickedCard = null;
+    let isResetting = false;
+
+    function checkCenteredCard() {
+        if (isResetting) return;
+        
+        const containerRect = carouselContainer.getBoundingClientRect();
+        const containerCenter = containerRect.left + containerRect.width / 2;
+        
+        let closestCard = null;
+        let closestDistance = Infinity;
+
+        projectTrack.querySelectorAll('.project-link').forEach(card => {
+            const cardRect = card.getBoundingClientRect();
+            const cardCenter = cardRect.left + cardRect.width / 2;
+            const distance = Math.abs(cardCenter - containerCenter);
+
+            if (distance < closestDistance) {
+                closestDistance = distance;
+                closestCard = card;
+            }
+        });
+
+        if (closestCard && closestDistance < 100 && lastClickedCard !== closestCard) {
+            lastClickedCard = closestCard;
+            closestCard.click();
+        }
+    }
+
+    function handleInfiniteScroll() {
+        if (isResetting) return;
+        
+        const scrollLeft = carouselContainer.scrollLeft;
+        const containerWidth = carouselContainer.clientWidth;
+        const scrollWidth = projectTrack.scrollWidth;
+        
+        const maxScroll = scrollWidth - containerWidth;
+        
+        if (scrollLeft >= maxScroll - 100) {
+            isResetting = true;
+            carouselContainer.scrollLeft = 0;
+            lastClickedCard = null;
+            setTimeout(() => {
+                isResetting = false;
+                checkCenteredCard();
+            }, 60);
+        }
+    }
+
+    carouselContainer.addEventListener('scroll', checkCenteredCard, { passive: true });
+    carouselContainer.addEventListener('scroll', handleInfiniteScroll, { passive: true });
+    window.addEventListener('resize', () => {
+        checkCenteredCard();
+        handleInfiniteScroll();
+    }, { passive: true });
+    
+    setTimeout(checkCenteredCard, 100);
 });
 
 
-/* ─────────────────────────────────────────
-   9. FALLING HEARTS ENGINE
-   Triggered when #social-intro is in view
-───────────────────────────────────────── */
 (function () {
     const canvas  = document.createElement('canvas');
     canvas.id     = 'hearts-canvas';
@@ -175,7 +269,6 @@ document.addEventListener('DOMContentLoaded', () => {
     resize();
     window.addEventListener('resize', resize, { passive: true });
 
-    /* Heart path helper */
     function drawHeart (ctx, x, y, size) {
         ctx.save();
         ctx.translate(x, y);
@@ -189,11 +282,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const COLORS = [
-        'rgba(255,60,172,',   // pink
-        'rgba(255,107,0,',    // orange
-        'rgba(123,47,247,',   // purple
-        'rgba(255,100,150,',  // rose
-        'rgba(255,80,80,',    // red
+        'rgba(255,60,172,',   
+        'rgba(255,107,0,',    
+        'rgba(123,47,247,',   
+        'rgba(255,100,150,', 
+        'rgba(255,80,80,',    
     ];
 
     function spawnHeart () {
@@ -253,11 +346,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         clearInterval(spawnInterval);
         spawnInterval = null;
-
-        // Fade out canvas
         canvas.classList.remove('active');
-
-        // Let remaining hearts fall out
         setTimeout(() => {
             cancelAnimationFrame(animId);
             hearts = [];
@@ -265,7 +354,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 1200);
     }
 
-    /* Observe the social-intro section */
     const socialSection = document.getElementById('social-intro');
     if (socialSection) {
         const heartsObserver = new IntersectionObserver((entries) => {
@@ -283,9 +371,6 @@ document.addEventListener('DOMContentLoaded', () => {
 })();
 
 
-/* ─────────────────────────────────────────
-   10. IG "LIKE" BUTTON in social section
-───────────────────────────────────────── */
 (function () {
     const likeBtn = document.getElementById('igLikeBtn');
     const likeCount = document.getElementById('igLikeCount');
@@ -299,8 +384,6 @@ document.addEventListener('DOMContentLoaded', () => {
         likeBtn.classList.toggle('liked', liked);
         count = liked ? count + 1 : count - 1;
         likeCount.textContent = count.toLocaleString();
-
-        // Spawn mini pop heart at click position
         if (liked) {
             const pop = document.createElement('span');
             pop.className = 'si-heart-pop';
@@ -314,10 +397,6 @@ document.addEventListener('DOMContentLoaded', () => {
 })();
 
 
-/* ─────────────────────────────────────────
-   11. SMOOTH SECTION ENTRANCE via CSS class
-───────────────────────────────────────── */
-// Stagger children of a container that has data-stagger attribute
 document.querySelectorAll('[data-stagger]').forEach(parent => {
     const children = [...parent.children];
     children.forEach((child, i) => {

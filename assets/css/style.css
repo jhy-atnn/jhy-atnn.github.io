@@ -1,8 +1,3 @@
-/* ═══════════════════════════════════════════════════════════
-   STYLE.CSS — Master stylesheet (imports all partials)
-   Portfolio: Jhody Atinon · @jhy_atnn
-═══════════════════════════════════════════════════════════ */
-
 @import url('base.css');
 @import url('nav.css');
 @import url('hero.css');

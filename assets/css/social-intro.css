@@ -1,7 +1,3 @@
-/* ═══════════════════════════════════════════════════════════
-   SOCIAL-INTRO.CSS — IG-motif Social Section + Hearts
-═══════════════════════════════════════════════════════════ */
-
 #social-intro {
     background: var(--bg-main);
     padding: 140px 0;
@@ -10,7 +6,6 @@
     z-index: 1;
 }
 
-/* ── Ambient blobs ── */
 .si-bg-blob {
     position: absolute;
     border-radius: 50%;
@@ -47,7 +42,6 @@
     opacity: 0.85;
 }
 
-/* ── Layout ── */
 .si-wrapper {
     max-width: 1440px;
     margin: 0 auto;
@@ -63,7 +57,7 @@
 .si-grid-backdrop-layer {
     position: absolute;
     left: 50%;
-    top: 55%;
+    top: 50%;
     transform: translate(-50%, -50%);
     width: 68%;
     max-width: 1100px;
@@ -107,7 +101,6 @@
     filter: drop-shadow(0 25px 50px rgba(123, 47, 247, 0.2));
 }
 
-/* ── Center content ── */
 .si-center {
     display: flex;
     flex-direction: column;
@@ -195,9 +188,6 @@
 .si-btn-gh:hover { background: var(--purple); box-shadow: 0 8px 18px rgba(123, 47, 247, 0.35); }
 .si-btn-em:hover { background: var(--orange); box-shadow: 0 8px 18px rgba(255, 107, 0, 0.35); }
 
-/* ═══════════════════════════════════
-   FALLING HEARTS ANIMATION
-═══════════════════════════════════ */
 #hearts-canvas {
     position: fixed;
     top: 0;
@@ -229,7 +219,6 @@
     100% { opacity: 0; transform: scale(1) translateY(-60px); }
 }
 
-/* ── IG like button on social buttons ── */
 .si-ig-like-wrap {
     display: flex;
     align-items: center;
@@ -264,7 +253,6 @@
     color: var(--text-muted-custom);
 }
 
-/* ── Responsive ── */
 @media (max-width: 1199.98px) {
     .si-grid-backdrop-layer { width: 90%; top: 52%; }
     .si-surname { margin-bottom: 12rem; }

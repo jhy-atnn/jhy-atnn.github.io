@@ -1,7 +1,3 @@
-/* ═══════════════════════════════════════════════════════════
-   NAV.CSS — Capsule Navbar
-═══════════════════════════════════════════════════════════ */
-
 .capsule-nav {
     background: transparent !important;
     border: 1px solid transparent;
@@ -62,7 +58,6 @@
     color: var(--orange) !important;
 }
 
-/* ── Toggler / Burger ── */
 .navbar-toggler {
     border: none !important;
     padding: 0.25rem 0.5rem;
@@ -81,7 +76,6 @@
     display: block;
 }
 
-/* ── Mobile Collapse Menu ── */
 @media (max-width: 991.98px) {
     .capsule-nav {
         padding: 1rem 1.5rem;

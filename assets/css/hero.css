@@ -1,7 +1,3 @@
-/* ═══════════════════════════════════════════════════════════
-   HERO.CSS
-═══════════════════════════════════════════════════════════ */
-
 #hero {
     min-height: 100vh;
     display: flex;
@@ -17,7 +13,6 @@
     z-index: 1;
 }
 
-/* Subtle animated bg orb behind hero */
 #hero::before {
     content: '';
     position: absolute;
@@ -138,7 +133,6 @@
     50% { opacity: 0.28; transform: scale(1.06); }
 }
 
-/* Floating dots decoration */
 .hero-dots {
     position: absolute;
     pointer-events: none;
@@ -190,7 +184,6 @@
     transform: translateY(-2px);
 }
 
-/* ── Buttons ── */
 .btn-gradient {
     background: var(--gradient-btn);
     border: none;
@@ -235,7 +228,6 @@
     transform: translateY(-2px);
 }
 
-/* ── Responsive ── */
 @media (max-width: 991.98px) {
     #hero {
         padding: 120px 0 60px;

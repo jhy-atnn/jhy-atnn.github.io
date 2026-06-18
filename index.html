@@ -5,26 +5,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jhy_Atnn Portfolio</title>
-
-    <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-
-    <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-
-    <!-- Partials (imported via style.css) -->
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
 <body>
 
-    <!-- ═══════════════════ NAVBAR ═══════════════════ -->
     <nav id="mainNav" class="navbar navbar-expand-lg fixed-top capsule-nav">
         <div class="container-fluid px-4 px-lg-5">
 
@@ -32,7 +23,6 @@
                 <img src="assets/img/logo-text.png" alt="@jhy_atnn" height="46">
             </a>
 
-            <!-- Burger (Bootstrap handles toggle via data attrs) -->
             <button class="navbar-toggler" type="button"
                 data-bs-toggle="collapse"
                 data-bs-target="#navMenu"
@@ -58,17 +48,13 @@
     </nav>
 
 
-    <!-- ═══════════════════ HERO ═══════════════════ -->
     <section id="hero">
-        <!-- decorative floating dots -->
         <div class="hero-dots" aria-hidden="true">
             <span></span><span></span><span></span>
         </div>
 
         <div class="container">
             <div class="row align-items-center gy-4">
-
-                <!-- Photo (shown first on mobile via order) -->
                 <div class="col-lg-6 order-lg-2 hero-photo-wrap">
                     <div class="orb-ring mx-auto">
                         <div class="orb-inner">
@@ -77,7 +63,6 @@
                     </div>
                 </div>
 
-                <!-- Text -->
                 <div class="col-lg-6 order-lg-1">
                     <span class="hero-tag">Hello, I'm Jhody</span>
 
@@ -122,19 +107,16 @@
     </section>
 
 
-    <!-- ═══════════════════ SOCIAL INTRO (IG Section) ═══════════════════ -->
     <section id="social-intro" class="si-section">
         <div class="si-bg-blob si-blob-1"></div>
         <div class="si-bg-blob si-blob-2"></div>
 
         <div class="si-wrapper">
 
-            <!-- Left phone -->
             <div class="si-phone si-phone-left reveal reveal-left">
                 <img src="assets/img/phone 1-left side.svg" alt="Instagram preview left" class="si-phone-svg-layer">
             </div>
 
-            <!-- Center content -->
             <div class="si-center reveal">
                 <p class="si-tagline">progress is progress</p>
                 <h2 class="si-name">JHODY</h2>
@@ -150,7 +132,6 @@
                         </p>
                     </div>
 
-                    <!-- IG like button -->
                     <div class="si-ig-like-wrap reveal">
                         <button class="si-like-btn" id="igLikeBtn" aria-label="Like">
                             <i class="bi bi-heart-fill"></i>
@@ -180,14 +161,12 @@
                 </div>
             </div>
 
-            <!-- Right phone -->
             <div class="si-phone si-phone-right reveal reveal-right">
                 <img src="assets/img/phone 2-right side.svg" alt="Instagram preview right" class="si-phone-svg-layer">
             </div>
 
         </div>
 
-        <!-- Posts grid backdrop -->
         <div class="si-grid-backdrop-layer">
             <img src="assets/img/background posts.svg" alt="" class="si-grid-svg-layer" aria-hidden="true">
         </div>
@@ -205,7 +184,6 @@
                 </p>
             </div>
 
-            <!-- Skills row 1 -->
             <div class="row g-3 justify-content-center mb-4" data-stagger>
                 <div class="col-4 col-sm-3 col-md-2 col-lg-auto">
                     <div class="skill-icon-card">
@@ -249,7 +227,6 @@
                 </div>
             </div>
 
-            <!-- Skills row 2 -->
             <div class="row g-3 justify-content-center" data-stagger>
                 <div class="col-4 col-sm-3 col-md-2 col-lg-auto">
                     <div class="skill-icon-card">
@@ -353,10 +330,28 @@
             </div>
         </div>
 
-        <div class="carousel-container reveal">
-            <div class="carousel-track" id="projectTrack">
+        <div class="project-showcase reveal">
+            <aside class="project-detail-panel" id="projectDetail" aria-live="polite">
+                <div class="project-detail-count" id="projectDetailCount">01</div>
+                <span class="project-detail-cat" id="projectDetailCat">Web Design</span>
+                <h3 id="projectDetailTitle">Ascend E-Commerce Platform</h3>
+                <p id="projectDetailDesc">A modern e-commerce platform designed for a seamless shopping and checkout experience, featuring responsive layouts, dynamic product filtering, and secure transactions.</p>
+                <div class="project-detail-tags" id="projectDetailTags">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">JS</span>
+                    <span class="tech-tag">JSON</span>
+                    <span class="tech-tag">HTML</span>
+                    <span class="tech-tag">CSS</span>
+                </div>
+                <a href="https://github.com/jhy-atnn/Ascend-Sports-E-Commerce.git" class="project-detail-link" id="projectDetailLink" target="_blank" rel="noopener">
+                    View Repository <i class="bi bi-arrow-up-right"></i>
+                </a>
+            </aside>
 
-                <a href="https://github.com/jhy-atnn/Ascend-Sports-E-Commerce.git" class="project-link" target="_blank">
+            <div class="carousel-container">
+                <div class="carousel-track" id="projectTrack">
+
+                <button type="button" class="project-link active" data-index="01" data-url="https://github.com/jhy-atnn/Ascend-Sports-E-Commerce.git">
                     <div class="project-card">
                         <div class="project-img-wrapper">
                             <img src="assets/img/ascend-prev.png" alt="Ascend Preview" class="project-img">
@@ -374,9 +369,9 @@
                             </div>
                         </div>
                     </div>
-                </a>
+                </button>
 
-                <a href="https://github.com/jhy-atnn/jhy-atnn.github.io.git" class="project-link" target="_blank">
+                <button type="button" class="project-link" data-index="02" data-url="https://github.com/jhy-atnn/jhy-atnn.github.io.git">
                     <div class="project-card">
                         <div class="project-img-wrapper">
                             <img src="assets/img/portf-prev.png" alt="Portfolio Preview" class="project-img">
@@ -392,9 +387,9 @@
                             </div>
                         </div>
                     </div>
-                </a>
+                </button>
 
-                <a href="https://github.com/jhy-atnn/Connect-Four-Pygame.git" class="project-link" target="_blank">
+                <button type="button" class="project-link" data-index="03" data-url="https://github.com/jhy-atnn/Connect-Four-Pygame.git">
                     <div class="project-card">
                         <div class="project-img-wrapper">
                             <img src="assets/img/confour-prev.png" alt="Connect Four Preview" class="project-img">
@@ -409,9 +404,9 @@
                             </div>
                         </div>
                     </div>
-                </a>
+                </button>
 
-                <a href="https://github.com/jhy-atnn/ApexGear-E-commerce.git" class="project-link" target="_blank">
+                <button type="button" class="project-link" data-index="04" data-url="https://github.com/jhy-atnn/ApexGear-E-commerce.git">
                     <div class="project-card">
                         <div class="project-img-wrapper">
                             <img src="assets/img/apexgear-prev.png" alt="ApeX Preview" class="project-img">
@@ -429,9 +424,9 @@
                             </div>
                         </div>
                     </div>
-                </a>
+                </button>
 
-                <a href="https://github.com/MNJ-S/MakiKonek.git" class="project-link" target="_blank">
+                <button type="button" class="project-link" data-index="05" data-url="https://github.com/MNJ-S/MakiKonek.git">
                     <div class="project-card">
                         <div class="project-img-wrapper">
                             <img src="assets/img/makikonek-prev.png" alt="MakiKonek Preview" class="project-img">
@@ -449,14 +444,15 @@
                             </div>
                         </div>
                     </div>
-                </a>
+                </button>
 
+                </div>
             </div>
         </div>
     </section>
 
 
-    <!-- ═══════════════════ EXPERIENCE / EDUCATION ═══════════════════ -->
+    <!-- ═══════════════════ EXPERIENCE ═══════════════════ -->
     <section id="experience">
         <div class="container">
             <div class="text-center mb-5 reveal">
@@ -546,10 +542,7 @@
     <footer>
         <div class="container footer-inner">
 
-            <!-- Top: Brand + Nav -->
             <div class="footer-top">
-
-                <!-- Brand -->
                 <div class="footer-brand">
                     <img src="assets/img/jhy-logo.svg" alt="Jhy Logo" class="footer-logo">
                     <p>Database Administrator &amp; Front-end Developer based in Calamba City, Laguna, Philippines.</p>
@@ -575,7 +568,6 @@
                     </div>
                 </div>
 
-                <!-- Nav links -->
                 <div class="footer-nav-group">
                     <h6>Navigation</h6>
                     <ul>
@@ -589,7 +581,6 @@
                     </ul>
                 </div>
 
-                <!-- Contact details -->
                 <div class="footer-nav-group">
                     <h6>Contact</h6>
                     <ul>
@@ -618,7 +609,6 @@
 
             </div>
 
-            <!-- Bottom bar -->
             <div class="footer-bottom">
                 <p class="footer-copy">
                     &copy; 2026 <span>Jhody Atinon</span>. All rights reserved.
