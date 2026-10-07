@@ -252,6 +252,141 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
+document.addEventListener('DOMContentLoaded', () => {
+    const activityTrack = document.getElementById('activityTrack');
+    const activityDetail = document.getElementById('activityDetail');
+    if (!activityTrack || !activityDetail) return;
+
+    const originalCards = Array.from(activityTrack.querySelectorAll('.project-link'));
+    originalCards.forEach((card) => {
+        const clone = card.cloneNode(true);
+        clone.classList.remove('active');
+        activityTrack.appendChild(clone);
+    });
+
+    const detailCount = document.getElementById('activityDetailCount');
+    const detailCat = document.getElementById('activityDetailCat');
+    const detailTitle = document.getElementById('activityDetailTitle');
+    const detailDesc = document.getElementById('activityDetailDesc');
+    const detailTags = document.getElementById('activityDetailTags');
+    const detailLink = document.getElementById('activityDetailLink');
+
+    let currentIndex = 0;
+    let autoRotateInterval = null;
+
+    function setActivityDetails(card) {
+        const cat = card.querySelector('.project-cat')?.textContent.trim() || '';
+        const title = card.querySelector('h5')?.textContent.trim() || '';
+        const desc = card.querySelector('p')?.textContent.trim() || '';
+        const tags = Array.from(card.querySelectorAll('.tech-tag')).map(tag => tag.outerHTML).join('');
+
+        activityTrack.querySelectorAll('.project-link').forEach((item) => {
+            item.classList.toggle('active', item.querySelector('h5')?.textContent.trim() === title);
+        });
+
+        activityDetail.classList.add('is-changing');
+        window.setTimeout(() => {
+            detailCount.textContent = card.dataset.index || '01';
+            detailCat.textContent = cat;
+            detailTitle.textContent = title;
+            detailDesc.textContent = desc;
+            detailTags.innerHTML = tags;
+            detailLink.href = card.dataset.url || '#';
+
+            activityDetail.classList.remove('is-changing');
+        }, 140);
+    }
+
+    function rotateToNext() {
+        const allCards = activityTrack.querySelectorAll('.project-link');
+        if (allCards.length === 0) return;
+
+        currentIndex = (currentIndex + 1) % originalCards.length;
+        setActivityDetails(allCards[currentIndex]);
+    }
+
+    function startAutoRotate() {
+        autoRotateInterval = setInterval(rotateToNext, 6700);
+    }
+
+    if (originalCards.length > 0) {
+        setActivityDetails(originalCards[0]);
+        startAutoRotate();
+    }
+
+    activityTrack.addEventListener('click', (event) => {
+        const card = event.target.closest('.project-link');
+        if (!card) return;
+
+        const allCards = activityTrack.querySelectorAll('.project-link');
+        currentIndex = Array.from(allCards).indexOf(card) % originalCards.length;
+
+        setActivityDetails(card);
+
+        clearInterval(autoRotateInterval);
+        startAutoRotate();
+    });
+
+    const carouselContainer = activityTrack.parentElement;
+    let lastClickedCard = null;
+    let isResetting = false;
+
+    function checkCenteredCard() {
+        if (isResetting) return;
+
+        const containerRect = carouselContainer.getBoundingClientRect();
+        const containerCenter = containerRect.left + containerRect.width / 2;
+
+        let closestCard = null;
+        let closestDistance = Infinity;
+
+        activityTrack.querySelectorAll('.project-link').forEach(card => {
+            const cardRect = card.getBoundingClientRect();
+            const cardCenter = cardRect.left + cardRect.width / 2;
+            const distance = Math.abs(cardCenter - containerCenter);
+
+            if (distance < closestDistance) {
+                closestDistance = distance;
+                closestCard = card;
+            }
+        });
+
+        if (closestCard && closestDistance < 100 && lastClickedCard !== closestCard) {
+            lastClickedCard = closestCard;
+            closestCard.click();
+        }
+    }
+
+    function handleInfiniteScroll() {
+        if (isResetting) return;
+
+        const scrollLeft = carouselContainer.scrollLeft;
+        const containerWidth = carouselContainer.clientWidth;
+        const scrollWidth = activityTrack.scrollWidth;
+        const maxScroll = scrollWidth - containerWidth;
+
+        if (scrollLeft >= maxScroll - 100) {
+            isResetting = true;
+            carouselContainer.scrollLeft = 0;
+            lastClickedCard = null;
+            setTimeout(() => {
+                isResetting = false;
+                checkCenteredCard();
+            }, 60);
+        }
+    }
+
+    carouselContainer.addEventListener('scroll', checkCenteredCard, { passive: true });
+    carouselContainer.addEventListener('scroll', handleInfiniteScroll, { passive: true });
+    window.addEventListener('resize', () => {
+        checkCenteredCard();
+        handleInfiniteScroll();
+    }, { passive: true });
+
+    setTimeout(checkCenteredCard, 100);
+});
+
+
 (function () {
     const canvas  = document.createElement('canvas');
     canvas.id     = 'hearts-canvas';
