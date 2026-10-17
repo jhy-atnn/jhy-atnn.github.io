@@ -25,15 +25,26 @@ const toggler    = document.querySelector('.navbar-toggler');
 const navMenu    = document.getElementById('navMenu');
 
 if (toggler && navMenu) {
+    const setMobileMenu = (isOpen) => {
+        navMenu.classList.toggle('show', isOpen);
+        toggler.setAttribute('aria-expanded', String(isOpen));
+    };
+
+    toggler.addEventListener('click', () => {
+        setMobileMenu(!navMenu.classList.contains('show'));
+    });
+
     navMenu.querySelectorAll('.nav-link').forEach(link => {
         link.addEventListener('click', () => {
             if (window.innerWidth < 992) {
-                const bsCollapse = bootstrap.Collapse.getInstance(navMenu)
-                    || new bootstrap.Collapse(navMenu, { toggle: false });
-                bsCollapse.hide();
+                setMobileMenu(false);
             }
         });
     });
+
+    window.addEventListener('resize', () => {
+        if (window.innerWidth >= 992) setMobileMenu(false);
+    }, { passive: true });
 }
 
 
